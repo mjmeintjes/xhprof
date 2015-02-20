@@ -38,7 +38,7 @@ if ($controlIPs === false || in_array($_SERVER['REMOTE_ADDR'], $controlIPs) || P
   {
     //Give them a cookie to hold status, and redirect back to the same page
     setcookie('_profile', $_GET['_profile']);
-    $newURI = str_replace(array('_profile=1','_profile=0'), '', $_SERVER['REQUEST_URI']);
+    $newURI = str_replace(array('_profile=' .  $_xhprof['profile_secret'],''), '', $_SERVER['REQUEST_URI']);
     header("Location: $newURI");
     exit;
   }
