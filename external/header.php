@@ -34,7 +34,7 @@ class visibilitator
 // Only users from authorized IP addresses may control Profiling
 if ($controlIPs === false || in_array($_SERVER['REMOTE_ADDR'], $controlIPs) || PHP_SAPI == 'cli')
 {
-  if (isset($_GET['_profile']) && $_GET['_profile'] == PROFILE_SECRET)
+  if (isset($_GET['_profile']) && $_GET['_profile'] == $_xhprof['profile_secret'])
   {
     //Give them a cookie to hold status, and redirect back to the same page
     setcookie('_profile', $_GET['_profile']);
@@ -77,7 +77,7 @@ foreach ($exceptionPostURLs as $url)
 unset($exceptionPostURLs);
 
 //Determine wether or not to profile this URL randomly
-if ($_xhprof['doprofile'] === false)
+if ($_xhprof['doprofile'] === false && isset($_xhprof['random_profiling']) && $_xhprof['random_profiling'])
 {
     //Profile weighting, one in one hundred requests will be profiled without being specifically requested
     if (rand(1, $weight) == 1)
