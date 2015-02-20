@@ -34,7 +34,7 @@ class visibilitator
 // Only users from authorized IP addresses may control Profiling
 if ($controlIPs === false || in_array($_SERVER['REMOTE_ADDR'], $controlIPs) || PHP_SAPI == 'cli')
 {
-  if (isset($_GET['_profile']))
+  if (isset($_GET['_profile']) && $_GET['_profile'] == PROFILE_SECRET)
   {
     //Give them a cookie to hold status, and redirect back to the same page
     setcookie('_profile', $_GET['_profile']);
